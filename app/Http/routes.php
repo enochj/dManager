@@ -1,5 +1,8 @@
 <?php
 
+use App\Card;
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Routes File
@@ -13,6 +16,14 @@
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::post('/card', function (Request $request) {
+	//
+});
+
+Route::delete('/card/{id}', function ($id) {
+	//
 });
 
 /*
