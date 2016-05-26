@@ -15,11 +15,28 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	$cards = Card::orderBy('code', 'asc')->get();
+    return view('cards', [
+    	'cards' => $cards
+    ]);
 });
 
 Route::post('/card', function (Request $request) {
-	//
+	$validator = Validator::make($request->all(), [
+		'name' => 'required|max:255',
+	]);
+	
+	if ($validator->fails()) {
+		return redirect('/')
+			->withInput()
+			->withErrors($validator);
+	}
+	
+	$card = new Card;
+	$card->name = $request->name;
+	$task->save();
+	
+	return redirect('/');
 });
 
 Route::delete('/card/{id}', function ($id) {
